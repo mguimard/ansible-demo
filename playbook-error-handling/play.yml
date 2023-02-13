@@ -1,0 +1,21 @@
+- hosts: all
+  tasks:
+    - name: On fait une commande arbitraire
+      raw: cowsay hello world
+      ignore_errors: yes
+      register: retour_commande
+      become: yes
+      when: une_condition
+      #retour_commande = {"changed": true, "msg": "non-zero return code", "rc": 127, "stderr": "Shared connection to machine2 closed.\r\n", "stderr_lines": ["Shared connection to machine2 closed."], "stdout": "bash: cowsay: command not found\r\n", "stdout_lines": ["bash: cowsay: command not found"]}
+      
+    - name: on debug un variable
+      debug:
+        var: retour_commande
+
+    - debug:
+        msg: Machine en erreur
+      when: retour_commande is failed
+
+    - debug:
+        msg: Machine Ok
+      when: retour_commande is succeeded
