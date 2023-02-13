@@ -1,0 +1,10 @@
+[machines_debian]
+machine1 message=Bonjour pkg=apt server=apache2
+
+[machines_centos]
+machine2 message=Hello pkg=dnf server=httpd
+
+[toutes_machines:children]
+machines_centos
+machines_debian
+
