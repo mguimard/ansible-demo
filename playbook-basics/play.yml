@@ -3,6 +3,9 @@
   # become global:
   become: yes
   tasks:
+    - package:
+        name: git
+        state: present
     - name: On s'assure de ping les machines
       ping:
     - name: On s'assure d'avoir git présent

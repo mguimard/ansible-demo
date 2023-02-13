@@ -1,0 +1,70 @@
+- hosts: all
+  become: yes
+  tasks:
+    # Tache cachée: gathering_facts (module setup)
+    # Installation de ptyhon3
+    - name: On installe python3 (version apt)
+      raw: apt install python3 -y
+      when: ansible_os_family == 'Debian'
+
+    - name: On installe python3 (version yum)
+      raw: yum install python3 -y
+      when: ansible_os_family == 'RedHat'
+    
+    # Version mutualisée
+    - name: On installe python3 (version mutualisée)
+      raw: "{{ ansible_pkg_mgr }} install python3 -y"
+
+    - name: On s'assure d'avoir notre motd copié
+      copy:
+        content: Bienvenue
+        dest: /etc/motd
+
+    - name: On s'assure d'avoir apache2 installé (machines debian)
+      when: ansible_os_family == 'Debian'
+      apt:
+        name: apache2
+        state: present
+
+    - name: On s'assure d'avoir httpd installé (machines centos)
+      when: ansible_os_family == 'RedHat'
+      dnf:
+        name: httpd
+        state: present
+
+    # Version mutualisée
+    - name: On s'assure d'avoir notre serveur web installé
+      package:
+        name: "{{ server }}"
+        state: present
+    
+    - name: On s'assure que notre fichier HTML soit bien placé dans /var/www/HTML
+      copy:
+        src: index.html
+        dest: /var/www/html/
+
+    - name: On s'assure qu'apache2 soit bien démarré
+      when: ansible_os_family == 'Debian'
+      service:
+        name: apache2
+        state: started
+        # actif au reboot
+        enabled: yes
+
+    - name: On s'assure que httpd soit bien démarré
+      when: ansible_os_family == 'RedHat'
+      service:
+        name: httpd
+        state: started
+        # actif au boot
+        enabled: yes
+
+    # version mutualisée
+    - name: On s'assure que notre serveur web soit bien démarré
+      service:
+        name: "{{ server }}"
+        state: started
+        enabled: yes
+
+    - name: On reboot nos machines
+      reboot:
