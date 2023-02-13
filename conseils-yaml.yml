@@ -1,0 +1,22 @@
+- hosts: all
+  tasks: 
+
+    # ventilation des conditions
+    - raw: echo hello
+      when: >
+        ansible_os_family == 'Debian' and 
+        ansible_os_family == 'RedHat' and
+        an_other_condition or (blablabl and not other_condition)
+    
+    # variables, obligation de quotes
+    - raw: apt install {{ server }} -y    # KO
+    - raw: "apt install {{ server }} -y"  # OK
+
+    # versions json/ini/yaml
+    - package: {name: apache2, state: present}
+    - package: {"name": "apache2", "state": "present"}
+    - pacakge: name=apache2 state=present
+    - package:
+        name: apache2
+        state: present
+        enabled: yes

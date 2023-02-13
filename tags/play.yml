@@ -1,0 +1,29 @@
+# ansible-playbook play.yml --tags service
+# ansible-playbook play.yml --skip-tags service
+# mots clés: tagged, untagged
+
+- hosts: machines_debian
+  become: yes
+  tasks:
+    - raw: apt install -y python3
+      tags:
+        - setup
+        - install
+        - python
+    
+    - raw: apt install apache2 -y
+      tags:
+        - setup
+        - install
+        - deps
+
+    - raw: echo 'port=8080' > /etc/apache2/ports.conf
+      tags:
+        - config
+        - service
+
+    - raw: systemctl start apache2
+      tags:
+        - service
+
+    - raw: echo hello world
