@@ -1,0 +1,23 @@
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [machine1]
+ok: [machine2]
+
+TASK [On s'assure de ping les machines] ****************************************
+ok: [machine1]
+ok: [machine2]
+
+TASK [On s'assure que Apache soit installé] ************************************
+ok: [machine1]
+ok: [machine2]
+
+TASK [On s'assure que nano soit installé] **************************************
+ok: [machine1]
+ok: [machine2]
+
+PLAY RECAP *********************************************************************
+machine1                   : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+machine2                   : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

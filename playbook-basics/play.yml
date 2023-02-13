@@ -1,0 +1,16 @@
+# ansible-playbook play.yml
+- hosts: all
+  # become global:
+  become: yes
+  tasks:
+    - name: On s'assure de ping les machines
+      ping:
+    - name: On s'assure que Apache soit installé
+      become: yes
+      package:
+        name: "{{ server }}"
+        state: present
+    - name: On s'assure que nano soit installé
+      package:
+        name: nano
+        state: present

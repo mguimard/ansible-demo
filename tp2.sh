@@ -1,6 +1,8 @@
 #!/bin/bash
 
+# Affiche la commande
 set -x
+# Stop on error
 set -e
 
 # Installer python
