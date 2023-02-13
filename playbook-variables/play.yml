@@ -1,0 +1,52 @@
+# Ce playbook fait ceci..
+# Options du playbook:
+#    always_debug: yes/no, joue les taches debug
+#
+# Garder l'inventaire pour des paramètres de connexion SSH
+# Variables métier/ configuration => dossiers host_vars/group_vars
+# Varibles techniques/privées dans le playbook
+
+- hosts: all
+  vars:
+    always_debug: yes
+    prec: 12
+    fruits:
+      - bananes
+      - oranges
+      - citrons
+  vars_files:
+    - variables.yml
+  tasks:
+    - debug:
+        var: prec
+      vars:
+        prec: 17
+      when: always_debug
+
+    - when: ansible_os_family == 'Debian'
+      debug:
+        msg: apt install curl
+
+    - when: ansible_os_family == 'Debian'
+      debug:
+        msg: apt install git
+
+    # version block:
+    - block:
+        - debug:
+            msg: apt install curl
+        - debug:
+            msg: apt install git
+          vars:
+            prec: 17
+      when: ansible_os_family == 'Debian'
+      become: yes
+      vars:
+        prec: 16
+
+    # precedence 18
+    - include_vars: variables.yml
+    - debug:
+        var: prec
+      
+        

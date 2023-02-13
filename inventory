@@ -1,10 +1,16 @@
 [machines_debian]
-machine1 message=Bonjour pkg=apt server=apache2
+machine1 message=Bonjour pkg=apt server=apache2 prec=8
 
 [machines_centos]
-machine2 message=Hello pkg=dnf server=httpd
+machine2 message=Hello pkg=dnf server=httpd prec=8
 
 [toutes_machines:children]
 machines_centos
 machines_debian
+
+[machines_debian:vars]
+prec=6
+
+[all:vars]
+prec=4
 
