@@ -1,0 +1,8 @@
+- hosts: all
+  tasks:
+    # appel à library/mon-module.py
+    - mon-module:
+        arg1: "{{ 'hello' | md5 }}"
+        arg2: yes
+        #name: apache2
+        #state: present
