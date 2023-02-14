@@ -3,7 +3,10 @@
   vars:
     mysql_root_password: 1234
     mysql_databases:
-      - products
-      - users
+      - name: products
+      - name: users
+    #affiche_bienvenue: hello world
+    affiche_dns: blablabla
   roles:
-    - geerlingguy.mysql
+    - my-custom-motd
+    #- geerlingguy.mysql

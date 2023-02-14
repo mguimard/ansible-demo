@@ -1,0 +1,4 @@
+---
+# defaults file for my-custom-motd
+affiche_bienvenue: no
+affiche_dns: no
