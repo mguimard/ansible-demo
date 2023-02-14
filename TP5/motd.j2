@@ -5,6 +5,9 @@ Noyau: {{ ansible_kernel }} {{ ansible_kernel_version }}
 Gestionnaire de paquets: {{ ansible_pkg_mgr }}
 Gestionnaire de services: {{ ansible_service_mgr }}
 Nombre de paquets installés: {{ ansible_facts.packages | length }}
+Nombre de services installés: {{ ansible_facts.services | length }}
+Nombre de services démarrés: {{ ansible_facts.services.values() | selectattr("state", "equalto", "running") | length }}
+
 
 Liste DNS:
 {% for d in ansible_dns.nameservers %}

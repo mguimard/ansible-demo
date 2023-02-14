@@ -1,0 +1,29 @@
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [machine1]
+ok: [machine2]
+
+TASK [On s'assure que la configuration nginx soit bien générée (partie 1)] *****
+ok: [machine1]
+ok: [machine2]
+
+TASK [package_facts] ***********************************************************
+ok: [machine2]
+ok: [machine1]
+
+TASK [service_facts] ***********************************************************
+ok: [machine2]
+ok: [machine1]
+
+TASK [On s'assure que le motd soit bien généré (partie 2)] *********************
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was:   line 0
+fatal: [machine1]: FAILED! => {"changed": false, "msg": "TemplateSyntaxError: Could not load \"running\": 'running'\n  line 0"}
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was:   line 0
+fatal: [machine2]: FAILED! => {"changed": false, "msg": "TemplateSyntaxError: Could not load \"running\": 'running'\n  line 0"}
+
+PLAY RECAP *********************************************************************
+machine1                   : ok=4    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+machine2                   : ok=4    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+

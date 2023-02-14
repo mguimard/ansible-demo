@@ -18,6 +18,16 @@
     # Partie 2
     # Collecte des paquets installés
     - package_facts:
+    # Collecte l'état des services
+    - service_facts:
+
+    # ansible_facts.services.values() | selectattr("state", "started") | length 
+    #- debug:
+    #    msg: "{{ansible_facts.services.values() }}"
+
+    #- fail:
+      
+
     # Template motd
     - name: On s'assure que le motd soit bien généré (partie 2)
       become: yes

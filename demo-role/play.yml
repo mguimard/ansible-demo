@@ -1,0 +1,9 @@
+- hosts: all
+  become: yes
+  vars:
+    mysql_root_password: 1234
+    mysql_databases:
+      - products
+      - users
+  roles:
+    - geerlingguy.mysql
