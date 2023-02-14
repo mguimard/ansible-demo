@@ -1,0 +1,26 @@
+- hosts: all
+
+  # Variables pour la partie 1
+  vars:
+    port: 1234
+    server_name: localhost
+    access_file_name: my-access
+    error_file_name: my-error
+    proxy_pass: http://somewhere.net/api/
+
+  tasks:
+    # Partie 1
+    - name: On s'assure que la configuration nginx soit bien générée (partie 1)
+      template:
+        src: nginx.conf.j2
+        dest: nginx.conf
+    
+    # Partie 2
+    # Collecte des paquets installés
+    - package_facts:
+    # Template motd
+    - name: On s'assure que le motd soit bien généré (partie 2)
+      become: yes
+      template:
+        src: motd.j2
+        dest: /etc/motd

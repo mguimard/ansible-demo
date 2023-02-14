@@ -28,6 +28,7 @@
         msg: "{{ 'hello' | md5 | upper }}"
 
     # collecte manuelle des infos relatives au gestionnaire de paquets
+    # rempli la variable ansible_facts.packages
     - package_facts:
 
     # collecte manuelle des infos relatives aux services

@@ -1,0 +1,41 @@
+Bienvenue sur le serveur {{ ansible_hostname }}
+OS: {{ ansible_distribution }}
+Version: {{ ansible_distribution_version }}
+Noyau: {{ ansible_kernel }} {{ ansible_kernel_version }}
+Gestionnaire de paquets: {{ ansible_pkg_mgr }}
+Gestionnaire de services: {{ ansible_service_mgr }}
+Nombre de paquets installés: {{ ansible_facts.packages | length }}
+
+Liste DNS:
+{% for d in ansible_dns.nameservers %}
+- {{ d }}
+{% endfor %}
+
+Interfaces réseau:
+{% for i in ansible_interfaces |sort %}
+- {{ i }}: {{ ansible_facts[i].ipv4.address }}
+{% endfor %}
+
+{# 
+    Structure des disques/partitions
+
+    ansible_devices: 
+      nom_disque_1: 
+        partitions:
+          nom_partition_1:
+            size: 20GB
+          nom_partition_2:
+            size: 10GB
+      nom_disque_2: 
+        partitions:
+          nom_partition_1:
+            size: 20GB
+
+#}
+Partitions disques:
+{% for nom_disque, disque in ansible_devices.items() %}
+- {{ nom_disque }}
+{% for nom_partition, partition in disque.partitions.items() %}
+    - {{ nom_partition }}: {{ partition.size }}
+{% endfor %}
+{% endfor %}
