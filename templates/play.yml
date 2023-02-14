@@ -1,0 +1,39 @@
+- hosts: all
+  become: yes
+  # desactivation possible de la collecte automatique
+  gather_facts: yes
+  vars:
+    my_variable: hello world
+    fruits:
+      - kiwis
+      - bananes
+      - citrons
+    intf: eth1
+    parc:
+      pc1:
+        logiciels:
+          - curl
+          - git
+        ip: 1.2.3.4
+      pc2:
+        logiciels:
+          - wget
+          - apache2
+        ip: 4.3.2.1
+    resultat_lookup_http: "{{ lookup('url', 'https://raw.githubusercontent.com/mguimard/ansible-demo/master/my-api') }}"
+    resultat_lookup_pipe: "{{ lookup('pipe', 'figlet {{ inventory_hostname }}') }}"
+  tasks:
+    # tache cachée: setup (collecte des facts)
+    - debug:
+        msg: "{{ 'hello' | md5 | upper }}"
+
+    # collecte manuelle des infos relatives au gestionnaire de paquets
+    - package_facts:
+
+    # collecte manuelle des infos relatives aux services
+    - service_facts:
+
+    - name: On s'assure d'avoir notre fichier déposé au bon endroit
+      template:
+        src: fichier.j2
+        dest: /etc/motd

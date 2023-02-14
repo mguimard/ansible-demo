@@ -1,0 +1,48 @@
+{{ resultat_lookup_pipe }}
+
+Resultat lookup http: {{ resultat_lookup_http }}
+
+Fichier généré le {{ template_run_date }}
+
+Vérification de l'installation de git
+{% if ansible_facts.packages.git is defined %}
+Version installée: {{ ansible_facts.packages.git[0].version }}
+{% endif %}
+
+Vérification du statut d'apache2
+{% if ansible_facts.services.apache2 is defined %}
+{{ ansible_facts.services.apache2 }}
+Statut apache: {{ ansible_facts.services.apache2.state }}
+{% endif %}
+
+{{ group_names }} 
+
+{{ hostvars }}
+
+Bios: {{ ansible_bios_vendor }} {{ ansible_bios_version }} {{ ansible_bios_date }}
+IP: {{ ansible_eth0.ipv4.address }}
+
+{% for f in fruits | sort %}
+- J'aime les {{ f | upper }} {{ f | md5 }}
+{% endfor %}
+
+Version raccourcie {{ ansible_eth0.ipv4.address }}
+Version longue {{ ansible_facts['eth0'].ipv4.address }}
+Version avec variable {{ ansible_facts[intf].ipv4.address }}
+
+{% for pc_name, pc_details in parc.items() %}
+- {{ pc_name }} : {{ pc_details }}
+{% for l in pc_details.logiciels %}
+    - {{ l }}
+{% endfor %}
+{% endfor %}
+
+{% if voiture is defined %}
+{{ voiture }}
+{% endif %}
+
+{# Ceci est un commentaire #}
+
+Ma variable = {{ my_variable }}
+
+{{ fruits }}
