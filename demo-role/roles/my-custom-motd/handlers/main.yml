@@ -1,2 +1,5 @@
 ---
 # handlers file for my-custom-motd
+- name: recharge_service
+  debug:
+    msg: ....

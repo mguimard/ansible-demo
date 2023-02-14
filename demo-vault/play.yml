@@ -1,0 +1,18 @@
+- hosts: all
+  # ansible-vault create variables.yml
+  # mot de passse: 1234
+  # ansible-playbook play.yml --ask-vault-pass
+
+  # Si la clé est dans un fichier:
+  # ansible-playbook play.yml --vault-id whatever@mdp
+
+  # Si plusieurs clés:
+  # ansible-playbook play.yml --vault-id password1@mdp --vault-id password2@/root/private_key
+  vars_files:
+    - variables.yml
+    - variables2.yml
+  tasks:
+    - debug:
+        var: secret
+    - debug:
+        var: root_password

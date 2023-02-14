@@ -1,0 +1,13 @@
+- hosts: all
+  vars:
+    my_port: 12345
+  tasks:
+    - copy:
+        content: "port={{my_port}}"
+        dest: my-conf.txt
+      register: retour_de_copy
+
+    - debug:
+        msg: redémarrage du service....
+      when: retour_de_copy is changed
+  

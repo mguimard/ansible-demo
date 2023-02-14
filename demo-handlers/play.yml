@@ -1,0 +1,26 @@
+- hosts: all
+  vars:
+    my_port: 1234
+
+  handlers:
+    - name: recharge_service
+      debug:
+        msg: rechargement du service...
+
+  tasks:
+    - copy:
+        content: "port={{my_port}}"
+        dest: my-conf.txt
+      notify: recharge_service
+
+    # lancement manuel des handlers
+    - meta: flush_handlers
+
+    - copy:
+        content: "port={{my_port}}"
+        dest: my-conf-2.txt
+      notify: recharge_service
+      # notifie une 2eme fois, mais le handler n'est exécuté qu'une fois
+
+    - debug:
+        msg: fin du playbook
