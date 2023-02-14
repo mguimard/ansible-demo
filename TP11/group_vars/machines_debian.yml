@@ -1,0 +1,4 @@
+# Les machines du groupe my_debians devront afficher les 
+# informations basiques + la liste des interfaces.
+show_basic_info: yes
+show_interfaces: yes

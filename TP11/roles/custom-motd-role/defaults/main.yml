@@ -1,0 +1,7 @@
+---
+# defaults file for custom-motd-role
+show_welcome: yes
+show_basic_info: no
+show_dns: no
+show_interfaces: no
+show_disks: no

@@ -1,0 +1,6 @@
+# La machine centos1 devra tout afficher.
+show_welcome: yes
+show_basic_info: yes
+show_dns: yes
+show_interfaces: yes
+show_disks: yes

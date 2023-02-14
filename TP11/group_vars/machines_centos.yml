@@ -1,0 +1,4 @@
+# Les machines du groupe my_centos devront afficher seulement 
+# la liste des partitions.
+show_welcome: no
+show_disks: yes

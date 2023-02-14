@@ -1,0 +1,11 @@
+---
+# tasks file for custom-motd-role
+- package_facts:
+  when: show_basic_info
+
+- service_facts:
+  when: show_basic_info
+
+- template:
+    src: motd.j2
+    dest: /etc/motd
